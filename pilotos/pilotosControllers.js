@@ -79,7 +79,7 @@ const cargarImagen=(req, res)=>{
 }
 
 const tablaGeneral =(req, res)=>{
-    dbConnection.query("SELECT r.id_piloto, p.nombre AS nombre_piloto, SUM (r.puntaje) AS puntaje_total FROM resultados r JOIN suyairacing p ON r.id_piloto = p.id_piloto GROUP BY r.id_piloto, p.nombre", (err, data) =>{
+    dbConnection.query("SELECT r.id_piloto, p.nombre AS nombre_piloto, SUM (r.puntaje) AS puntaje_total FROM resultados r JOIN suyairacing p ON r.id_piloto = p.id_piloto GROUP BY r.id_piloto, p.nombre ORDER BY puntaje_total DESC", (err, data) =>{
         if (err){
             res.status(500).json({"mensaje":err})
         } else {
