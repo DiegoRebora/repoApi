@@ -63,6 +63,15 @@ const borrarCarrera = (req, res) => {
     })
 
 }
+// const traerPodios=(req, res)=>{
+//     dbConnection.query("SELECT r.id_piloto, p.nombre AS nombre_piloto, p.apellido AS apellido_piloto, FROM resultados r JOIN suyairacing p ON r.id_piloto = p.id_piloto GROUP BY r.id_piloto, p.nombre ORDER BY puntaje_total DESC", (err, data) =>{
+//         if (err){
+//             res.status(500).json({"mensaje":err})
+//         } else {
+//             res.send(data)
+//             console.log(data)
+//         }
+//     } ) }
 
 
 module.exports={todasCarreras, cargarCarrera, actualizarCarrera, borrarCarrera}
