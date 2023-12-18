@@ -15,8 +15,8 @@ const todosPilotos = (req, res) => {
 
 const cargarPiloto = (req, res) => {
     const {nombre, apellido, edad, apodo}= req.body
-    const img="http://localhost:4000/" + req.file.path;/// ver la clase y chequear TODO TEMA IMAGEN
-    dbConnection.query("INSERT INTO `suyairacing` (nombre,apellido,edad, apodo, img) VALUES (?,?,?,?,?)" , [nombre, apellido,edad, apodo, img], (err, data) => {
+    //const img="http://localhost:4000/" + req.file.path;/// ver la clase y chequear TODO TEMA IMAGEN
+    dbConnection.query("INSERT INTO `suyairacing` (nombre,apellido,edad, apodo) VALUES (?,?,?,?)" , [nombre, apellido,edad, apodo], (err, data) => {
         if (err){
             res.status(500).json({"mensaje": "Error en el servidor"})
             console.log(err)
