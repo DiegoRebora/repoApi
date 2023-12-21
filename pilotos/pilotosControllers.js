@@ -6,16 +6,24 @@ const todosPilotos = (req, res) => {
         if (err){
             res.status(500).json({"mensaje":err})
         } else {
-            res.send(data)
-            console.log(data)
+            const modifiedData = data.map((piloto) => ({
+                ...piloto,
+                img: piloto.img.replace(/\\/g, '/'),
+            }));
+            res.send(modifiedData)
+            console.log(modifiedData)
+
+
         }
     } )
 
 }
 
+
+
 const cargarPiloto = (req, res) => {
     const {nombre, apellido, edad, apodo}= req.body
-    //const img="http://localhost:4000/" + req.file.path;/// ver la clase y chequear TODO TEMA IMAGEN
+    //const img="http://localhost:4000/imagenes/" + req.file.path;/// ver la clase y chequear TODO TEMA IMAGEN
     dbConnection.query("INSERT INTO `suyairacing` (nombre,apellido,edad, apodo) VALUES (?,?,?,?)" , [nombre, apellido,edad, apodo], (err, data) => {
         if (err){
             res.status(500).json({"mensaje": "Error en el servidor"})
@@ -29,8 +37,8 @@ const cargarPiloto = (req, res) => {
 }
 
 const actualizarPiloto = (req, res) => {
-    let {nombre, apellido, edad, apodo}= req.body
-    dbConnection.query("UPDATE `suyairacing` SET nombre=?, apellido=?, edad=?, apodo=? WHERE id_piloto=?", [nombre, apellido,edad, apodo, req.params.id], (err, data) => { 
+    let {nombre, apellido, edad, apodo, id_piloto}= req.body
+    dbConnection.query("UPDATE `suyairacing` SET nombre=?, apellido=?, edad=?, apodo=? WHERE id_piloto=?", [nombre, apellido,edad, apodo, id_piloto], (err, data) => { 
         if (err){
             res.status(500).json({"mensaje": "Error en el servidor"})
             console.log(err)
@@ -46,11 +54,13 @@ const actualizarPiloto = (req, res) => {
 }
 
 const borrarPiloto = (req, res) => {    
-    dbConnection.query("DELETE FROM `suyairacing` WHERE id_piloto =?",  [req.params.id], (err, data) => { 
+    console.log(req.body)
+    const {id_piloto}=req.body
+    dbConnection.query("DELETE FROM `suyairacing` WHERE id_piloto =?",  [id_piloto], (err, data) => { 
         if (err){
             res.status(500).json({"mensaje": "Error en el servidor"})
             console.log(err)
-            console.log(req.params.id)
+
         } else {
             console.log(data)
             if (data.affectedRows==0){
@@ -62,8 +72,10 @@ const borrarPiloto = (req, res) => {
 }
 
 const cargarImagen=(req, res)=>{  
-    let imagen="http:localhost:4000/"+ req.file.path;
+    let imagen="http://localhost:4000/"+ req.file.path;
     console.log(imagen)
+    console.log(req.file)
+    console.log(req.file.path)
     dbConnection.query("UPDATE `suyairacing` SET img=? WHERE id_piloto=?", [imagen, req.params.id], (err, data) => { 
         if (err){
             res.status(500).json({"mensaje": "Error en el servidor"})
@@ -73,6 +85,7 @@ const cargarImagen=(req, res)=>{
             if (data.affectedRows==0){
                 res.status(404).json({"mensaje": "No existe ese piloto"})}
                 else {res.status(201).json({"mensaje":"Imagen cargada"})}
+                
         }
     })
 

@@ -10,7 +10,7 @@ server.use(express.json());
 server.use(cors());
 server.use("", require("./pilotos/pilotosRoutes"));
 server.use("", require("./carreras/carrerasRoutes"))
-server.use("/public", express.static("./imagenes"))
+server.use("/imagenes", express.static("./imagenes"))
 // server.use("/usuario", require("./usuarios/usuariosRoutes"))
 
 server.listen(port, ()=>{
