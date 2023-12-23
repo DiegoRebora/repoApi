@@ -11,7 +11,7 @@ server.use(cors());
 server.use("", require("./pilotos/pilotosRoutes"));
 server.use("", require("./carreras/carrerasRoutes"))
 server.use("/imagenes", express.static("./imagenes"))
-// server.use("/usuario", require("./usuarios/usuariosRoutes"))
+server.use("/usuario", require("./usuarios/usuariosRoutes"))
 
 server.listen(port, ()=>{
     console.log("Server is running in  port" + port )
