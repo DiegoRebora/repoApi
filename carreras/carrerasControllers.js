@@ -28,9 +28,9 @@ const cargarCarrera = (req, res) => {
 }
 
 const actualizarCarrera = (req, res) => {
-    let {nombre_carrera, fecha, corredores}= req.body
-    const id=req.params.id
-    dbConnection.query("UPDATE `carreras` SET nombre_carrera=?, fecha=?, corredores=? WHERE id_carrera=?", [nombre_carrera, fecha, corredores, id], (err, data) => { 
+    let {nombre_carrera, fecha, corredores, id_carrera}= req.body
+    console.log(nombre_carrera, fecha, corredores, id_carrera)
+    dbConnection.query("UPDATE `carreras` SET nombre_carrera=?, fecha=?, corredores=? WHERE id_carrera=?", [nombre_carrera, fecha, corredores, id_carrera], (err, data) => { 
         if (err){
             res.status(500).json({"mensaje": "Error en el servidor"})
             console.log(err)
