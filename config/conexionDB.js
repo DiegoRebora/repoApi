@@ -2,9 +2,10 @@ const mysql2=require("mysql2");
 require("dotenv").config();
 
 const infoDB={    
-    host: process.env.HOST, 
-   user: process.env.HOST_NAME, 
-   database: process.env.HOST_DB,
+    host: process.env.DB_HOST, 
+   user: process.env.DB_USER, 
+   database: process.env.DB_DATABASE,
+   password:process.env.DB_PASS
 }
 const dbConnection=mysql2.createConnection(infoDB)//despues creo la conexión con el objeto como parámetro
 
