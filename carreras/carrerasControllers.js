@@ -15,6 +15,7 @@ const todasCarreras = (req, res) => {
 
 const cargarCarrera = (req, res) => {
     let {nombre_carrera, fecha, corredores}= req.body
+    console.log(req.body)
     dbConnection.query("INSERT INTO `carreras` (nombre_carrera,fecha, corredores) VALUES (?,?,?)" , [nombre_carrera, fecha, corredores], (err, data) => {
         if (err){
             res.status(500).json({"mensaje": "error en el servidor"})
@@ -47,12 +48,11 @@ const actualizarCarrera = (req, res) => {
 }
 
 const borrarCarrera = (req, res) => {    
-    let id=req.params.id
-    dbConnection.query("DELETE FROM carreras WHERE id_carrera=?",  [id], (err, data) => { 
+    const {id_carrera}=req.body
+    dbConnection.query("DELETE FROM carreras WHERE id_carrera=?",  [id_carrera], (err, data) => { 
         if (err){
             res.status(500).json({"mensaje": "error en sistema"})
             console.log(err)
-            console.log(id)
         } else {
             console.log(data)
             if (data.affectedRows==0){

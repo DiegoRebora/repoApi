@@ -24,9 +24,12 @@ const logIn = (req, res) => {
 
     dbConnection.query("SELECT * FROM `usuarios` WHERE usuario=?", [usuario], async (err, data) => {
         if (err) {
+            console.log(err)
             res.status(500).json({ "mensaje": "Error en la petición" });
         } else {
+            console.log(data)
             let userData = data[0];
+            console.log(userData)
             let userPass = userData.password;
             let auth = await bcrypt.compare(password, userPass);
 
@@ -38,7 +41,7 @@ const logIn = (req, res) => {
                         if (err) {
                             res.status(500).send(err);
                         } else {
-                           
+                            
                             res.status(200).json({ message: "usuario ok", "token": token });
                         }
                     });

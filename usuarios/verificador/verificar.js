@@ -1,17 +1,21 @@
 const jwt=require("jsonwebtoken");
+require("dotenv").config();
 
-
+//Finalmente, nada de esto lo utilicé, pero el plan es utilizarlo más adelante. 
 
 const verifUsuario = (req, res, next)=>{
     const autoUsuario= req.headers.authorization;
 
     const token=autoUsuario.split(" ").pop()
-    jwt.verify(token, "suyaicarreras", (err,data)=>{ //recordar usar dotenv y después cambiar la variable de la clave segura. 
+    jwt.verify(token, process.env.JWT_PASS, (err,data)=>{ //recordar usar dotenv y después cambiar la variable de la clave segura. 
         if(err){
+            if(err.name =="TokenExpiredError"){
+                res.json({"message":"Expiro el token"})
+            }
             res.json({"message": "Error en la autorización", "error": err})
 
         }else{
-            console.log(data)
+            
             next()
         }
     } )

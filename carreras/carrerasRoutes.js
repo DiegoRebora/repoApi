@@ -6,6 +6,6 @@ const {todasCarreras, cargarCarrera, actualizarCarrera, borrarCarrera}=require("
 route.get("/carreras", todasCarreras);
 route.post("/cargarCarrera", cargarCarrera);
 route.put("/cargarCarrera/:id_carrera", actualizarCarrera);
-route.delete("/borrarCarrera/:id_carrera", borrarCarrera);
+route.delete("/borrarCarrera", borrarCarrera);
 
 module.exports=route
