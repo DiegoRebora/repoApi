@@ -23,7 +23,7 @@ const todosPilotos = (req, res) => {
 
 const cargarPiloto = (req, res) => {
     const {nombre, apellido, edad, apodo}= req.body
-    const img="https://suyairacing.onrender.com" + req.file.path;
+    const img="https://suyairacing.onrender.com/" + req.file.path;
     dbConnection.query("INSERT INTO `suyairacing` (nombre,apellido,edad, apodo, img) VALUES (?,?,?,?,?)" , [nombre, apellido,edad, apodo,img], (err, data) => {
         if (err){
             res.status(500).json({"mensaje": "Error en el servidor"})
