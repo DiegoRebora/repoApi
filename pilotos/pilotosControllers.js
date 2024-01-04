@@ -23,7 +23,7 @@ const todosPilotos = (req, res) => {
 
 const cargarPiloto = (req, res) => {
     const {nombre, apellido, edad, apodo}= req.body
-    const img="http://localhost:4000/" + req.file.path;
+    const img="https://suyairacing.onrender.com" + req.file.path;
     dbConnection.query("INSERT INTO `suyairacing` (nombre,apellido,edad, apodo, img) VALUES (?,?,?,?,?)" , [nombre, apellido,edad, apodo,img], (err, data) => {
         if (err){
             res.status(500).json({"mensaje": "Error en el servidor"})
@@ -54,7 +54,6 @@ const actualizarPiloto = (req, res) => {
 }
 
 const borrarPiloto = (req, res) => {    
-    console.log(req.body)
     const {id_piloto}=req.body
     dbConnection.query("DELETE FROM `suyairacing` WHERE id_piloto =?",  [id_piloto], (err, data) => { 
         if (err){

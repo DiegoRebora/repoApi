@@ -7,7 +7,7 @@ const verifUsuario = (req, res, next)=>{
     const autoUsuario= req.headers.authorization;
 
     const token=autoUsuario.split(" ").pop()
-    jwt.verify(token, process.env.JWT_PASS, (err,data)=>{ //recordar usar dotenv y después cambiar la variable de la clave segura. 
+    jwt.verify(token, process.env.JWT_PASS, (err,data)=>{
         if(err){
             if(err.name =="TokenExpiredError"){
                 res.json({"message":"Expiro el token"})

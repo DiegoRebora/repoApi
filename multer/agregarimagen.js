@@ -2,7 +2,7 @@ const multer=require("multer");
 
 const storage=multer.diskStorage({
     destination:(req,file,callback)=>{
-        callback(null, "https://suyairacing.onrender.com/imagenes")     
+        callback(null, "./imagenes")     
     },
     filename:(req,file,callback)=>{
         const ext=file.originalname.split(".").pop()
